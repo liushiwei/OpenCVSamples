@@ -246,7 +246,8 @@ public class Tutorial2Activity extends Activity implements
 
 			double px = (double) mRgba.width() / (double) Gray.width();
 			double py = (double) mRgba.height() / (double) Gray.height();
-
+			int imax=-1;
+			double amax=0;
 			 for (int i=0;i<rects.length;i++)
 			{
 				r=rects[i];
@@ -257,13 +258,18 @@ public class Tutorial2Activity extends Activity implements
 					r.width = (int) (r.width * px);
 					r.height = (int) (r.height * py);
 				
-				
+				if (r.x*r.y>amax)
+				{
+					amax=r.x*r.y;
+					imax=i;
+				}
 				Core.rectangle(mRgba,  r.tl(), r.br(), new Scalar(0, 0, 255,
 							0), 5);
 			}
 			 
-			 if (r!=null)
+			 if (imax>=0)
 			 {
+				 r=rects[imax];
 				 double w = mRgba.width();
 			     double h = mRgba.height();
 				 double ppx = (w) / (double) (mOpenCvCameraView.getWidth());

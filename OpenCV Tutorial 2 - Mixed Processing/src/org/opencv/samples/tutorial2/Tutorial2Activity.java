@@ -241,8 +241,10 @@ public class Tutorial2Activity extends Activity implements
 			
 		
 			 mHog.detectMultiScale(Gray,bodies,weights); 
+			 
 			 Rect r=null;
 			 Rect [] rects = bodies.toArray();
+			 double[] wei=weights.toArray();
 
 			double px = (double) mRgba.width() / (double) Gray.width();
 			double py = (double) mRgba.height() / (double) Gray.height();
@@ -258,9 +260,9 @@ public class Tutorial2Activity extends Activity implements
 					r.width = (int) (r.width * px);
 					r.height = (int) (r.height * py);
 				
-				if (r.x*r.y>amax)
+				if (wei[i]>amax)
 				{
-					amax=r.x*r.y;
+					amax=wei[i];
 					imax=i;
 				}
 				Core.rectangle(mRgba,  r.tl(), r.br(), new Scalar(0, 0, 255,
